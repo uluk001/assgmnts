@@ -14,8 +14,8 @@ The project includes models for `Author`, `Book`, and `Review`, and a services l
 1.  **Clone the repository:**
 
     ```bash
-    git clone <repository-url>
-    cd bookingem
+    git clone https://github.com/uluk001/assgmnts.git
+    cd assgmnts/bookingem
     ```
 
 2.  **Install dependencies using Poetry:**
