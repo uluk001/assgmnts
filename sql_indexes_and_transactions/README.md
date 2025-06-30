@@ -53,6 +53,8 @@
 EXPLAIN ANALYZE SELECT * FROM order_items WHERE order_id=123 AND price < 5000;
 ```
 *План выполнения должен показать использование композитного индекса по `(order_id, price)`.*
+![unnamed (2)](https://github.com/user-attachments/assets/41eb4353-7657-423a-abca-b8ecef613aae)
+![unnamed (3)](https://github.com/user-attachments/assets/0ff141e5-1eeb-481f-b580-847f83e87802)
 
 ---
 
@@ -69,6 +71,9 @@ DROP INDEX "order_items_product_name_gin_idx";
 
 **Обоснование:**
 > Удален GIN индекс по product_name, ставил думая что лучше подойдет для текстового поиска. Потом создал обычный индекс туда же, и Execution Time 90.469 ms → 42.530 ms.
+![unnamed (1)](https://github.com/user-attachments/assets/9dec551a-8446-45cb-be63-0aea17c41e0b)
+> ![unnamed](https://github.com/user-attachments/assets/aa286473-2bcf-4b9d-893f-4c70d0880e57)
+
 
 ---
 
@@ -87,4 +92,6 @@ DROP INDEX "order_items_product_name_gin_idx";
 - Обработать возможные ошибки.
 - Продемонстрировать, что в случае сбоя никаких частичных данных не остаётся в базе.
 
-*(Примечание: SQL-код для этой транзакции не был предоставлен в исходном тексте.)* 
+![unnamed](https://github.com/user-attachments/assets/8f074969-fbc0-461a-b933-577a05cdfe12)
+![unnamed (1)](https://github.com/user-attachments/assets/d856d082-5359-4361-a7d4-e56d452b681d)
+
