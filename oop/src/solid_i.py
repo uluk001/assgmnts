@@ -1,3 +1,6 @@
+from abc import ABC, abstractmethod
+
+
 class Animal:
     def __init__(self, name) -> None:
         self.name = name
@@ -6,31 +9,47 @@ class Animal:
         print(f"Hi, I'm {self.name}")
 
 
-class Flyable:
+class Flyable(ABC):
+    @abstractmethod
     def fly(self):
-        print("I can fly!")
+        pass
 
 
-class Runnable:
+class Runnable(ABC):
+    @abstractmethod
+    def run(self):
+        pass
+
+
+class Swimmable(ABC):
+    @abstractmethod
+    def swim(self):
+        pass
+
+
+class Lion(Animal, Runnable):
     def run(self):
         print("I can run!")
 
 
-class Swimmable:
+class Fish(Animal, Swimmable, Runnable):
+    def run(self):
+        print("I can run!")
+
     def swim(self):
         print("I can swim!")
 
 
-class Lion(Animal, Runnable):
-    pass
+class Eagle(Animal, Flyable, Runnable, Swimmable):
+    def run(self):
+        print("I can run!")
+
+    def swim(self):
+        print("I can swim!")
 
 
-class Fish(Animal, Swimmable):
-    pass
-
-
-class Eagle(Animal, Flyable, Runnable):
-    pass
+    def fly(self):
+        print("I can fly!")
 
 
 simba = Lion(name="Simba")

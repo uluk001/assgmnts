@@ -1,6 +1,6 @@
 import datetime
 
-from django.db.models import Avg, Count, F, Q
+from django.db.models import Avg, Count, F, Q, Prefetch
 
 from books.models import Author, Book, Review
 
@@ -149,9 +149,7 @@ def find_books_by_author_email(email: str):
 
 def find_books_by_author_last_name_contains(name_part: str):
     """Найди книги авторов, чья фамилия содержит «smith» (без учёта регистра)."""
-    return Book.objects.select_related("author").filter(
-        author__last_name__icontains=name_part
-    )
+    return Book.objects.filter(author__last_name__icontains=name_part)
 
 
 def find_authors_with_more_than_n_books(n: int):
@@ -206,4 +204,5 @@ def get_books_with_authors():
 
 def get_authors_with_their_books():
     """Получи список авторов и всех их книг так, чтобы было выполнено ровно два SQL-запроса."""
-    return Author.objects.prefetch_related("books")
+    books = Prefetch("books", queryset=Book.objects.all())
+    return Author.objects.prefetch_related(books)
